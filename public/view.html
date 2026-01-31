@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blink | Mensaje Recibido</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+    <div class="modal-overlay" id="passwordModal">
+        <div class="modal">
+            <h3>🔐 Contraseña Requerida</h3>
+            <p>Este contenido está protegido por contraseña.</p>
+            <p style="color: #ffcc00; font-size: 0.9em; margin-bottom: 20px;">⚠️ <strong>NO RECARGUES LA PÁGINA</strong>
+                o perderás el mensaje para siempre.</p>
+            <input type="password" id="unlockPassword" placeholder="Introduce la contraseña">
+            <button id="unlockBtn">Desbloquear</button>
+            <p id="attemptsDisplay" style="color: var(--error); margin-top: 10px; font-size: 0.85em;"></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>🔒 Archivo Seguro</h2>
+
+        <div class="warning-box">
+            ⚠️ <strong>Atención:</strong> Es posible que este mensaje se autodestruya después de leerlo. Asegúrate de
+            copiarlo si es importante.
+        </div>
+
+        <button id="decryptBtn">Ver Contenido Secreto</button>
+
+        <div id="messageArea"></div>
+        <div id="fileArea" style="display:none; margin-top: 15px;">
+            <p>📎 <strong>Archivo Adjunto:</strong> <span id="fileNameDisplay"></span></p>
+            <button id="downloadBtn" style="background:#007bff;">💾 Descargar Archivo</button>
+        </div>
+
+        <div id="qrCodeContainer"
+            style="margin: 20px auto; display:none; background:white; padding:10px; width:fit-content; border-radius:10px;">
+        </div>
+
+        <button id="copyBtn">📋 Copiar Todo</button>
+    </div>
+
+    <div id="toast" class="toast">Notificación</div>
+
+    <script src="view.js"></script>
+</body>
+
+</html>

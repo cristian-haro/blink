@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blink | Comparte seguro</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>🔒 Blink</h2>
+
+        <label>Mensaje</label>
+        <textarea id="message" placeholder="Escribe el contenido de tu mensaje..."></textarea>
+
+        <div class="settings-grid">
+            <div>
+                <label>Tiempo de validez</label>
+                <select id="ttl">
+                    <option value="3600">1 Hora</option>
+                    <option value="86400">24 Horas</option>
+                    <option value="604800">7 Días</option>
+                    <option value="60">1 Minuto</option>
+                </select>
+            </div>
+            <div>
+                <label>Límite de usos</label>
+                <input type="number" id="maxUses" value="1" min="1" max="100">
+            </div>
+        </div>
+
+        <label style="margin-top: 15px;">Adjuntar Archivo (Max 10MB)</label>
+        <div class="file-drop-zone" id="dropZone">
+            <p>📎 Arrastra tu archivo aquí o haz clic para seleccionar</p>
+            <p id="fileName" style="color: var(--primary); margin-top: 10px; font-size: 0.9em;"></p>
+        </div>
+        <input type="file" id="fileInput" style="display: none;">
+
+        <label>Contraseña (Opcional)</label>
+        <input type="password" id="passwordInput" placeholder="Protege el enlace con una contraseña (opcional)">
+
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <button id="generateBtn">
+            <div class="spinner" id="spinner"></div>
+            <span id="btnText">Generar Enlace Seguro</span>
+        </button>
+    </div>
+
+    <div class="modal-overlay" id="linkModal">
+        <div class="modal">
+            <span class="close-modal" id="closeModalBtn">&times;</span>
+            <h3 style="color: var(--primary); margin-top: 0;">🔗 ¡Enlace Listo!</h3>
+            <p style="font-size: 0.9em; color: var(--text-muted); margin-bottom: 20px;">Comparte este enlace con el
+                destinatario.</p>
+
+            <div id="qrCodeContainer"></div>
+
+            <div
+                style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; margin: 15px 0; word-break: break-all; border: 1px dashed var(--border);">
+                <span id="finalLink"
+                    style="color: var(--primary); font-family: 'JetBrains Mono', monospace; font-size: 0.85em;">https://...</span>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <button class="copy-btn" id="modalCopyBtn" style="width: 100%;">📋 Copiar Enlace</button>
+                <button class="copy-btn" id="emailBtn" style="width: 100%; background: rgba(255, 255, 255, 0.2);">📧
+                    Enviar por Correo</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Notificación</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
