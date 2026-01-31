@@ -2,6 +2,8 @@
 
 **Blink** es una herramienta de código abierto para compartir mensajes y archivos de forma segura mediante encriptación de extremo a extremo. Los mensajes se autodestruyen después de ser leídos o cuando expira su tiempo de vida, garantizando privacidad total.
 
+![Emisor](img/Emisor.png)
+
 ## Características
 
 - **Encriptación de extremo a extremo** con AES-GCM de 256 bits
