@@ -5,27 +5,22 @@
 ## Características
 
 - **Encriptación de extremo a extremo** con AES-GCM de 256 bits
-- **Autodestrucción configurable** - Los mensajes expiran automáticamente
+- **Tiempo activo configurable** - Los mensajes expiran automáticamente
 - **Protección por contraseña opcional** - Seguridad adicional con PBKDF2
 - **Adjuntar archivos** hasta 10MB (también encriptados)
 - **Códigos QR** para compartir enlaces fácilmente
 - **Zero-knowledge** - El servidor nunca ve el contenido sin encriptar
-- ⏱**Límite de vistas** - Controla cuántas veces se puede acceder al mensaje
+- **Límite de usos** - Controla cuántas veces se puede acceder al mensaje
 - **Dockerizado** para despliegue sencillo
 
 ## Instalación
-
-### Requisitos Previos
-
-- [Docker](https://www.docker.com/get-started) y Docker Compose instalados
-- Puerto 3000 disponible (configurable)
 
 ### Instalación con Docker (Recomendado)
 
 1. **Clona el repositorio:**
    ```bash
-   git clone <tu-repositorio>
-   cd encriptador
+   git clone https://github.com/cristian-haro/blink.git
+   cd blink
    ```
 
 2. **Configura las variables de entorno (opcional):**
@@ -63,7 +58,7 @@ docker-compose -f docker-compose.prod.yml up --build -d
 
 Asegúrate de configurar las variables de entorno apropiadas para producción.
 
-## 📖 Guía de Uso
+## Guía de Uso
 
 ### Enviar un Mensaje Seguro
 
@@ -110,24 +105,6 @@ Asegúrate de configurar las variables de entorno apropiadas para producción.
 - **Intentos de contraseña:** 3 intentos antes de autodestrucción
 - **Vistas máximas:** Configurable (1-100)
 
-## 🏗️ Arquitectura Técnica
-
-### Stack Tecnológico
-
-**Frontend:**
-- HTML5, CSS3, JavaScript (Vanilla)
-- Web Crypto API para encriptación cliente
-- QRCode.js para generación de códigos QR
-
-**Backend:**
-- Node.js con Express
-- Redis para almacenamiento temporal
-- Helmet para seguridad HTTP
-- Express Rate Limit para protección contra abuso
-
-**Infraestructura:**
-- Docker y Docker Compose
-- Nginx (opcional, para producción)
 
 ### Seguridad
 
@@ -154,91 +131,6 @@ Asegúrate de configurar las variables de entorno apropiadas para producción.
    - La desencriptación ocurre completamente en el cliente
    - El servidor nunca tiene acceso a la clave o contenido sin encriptar
 
-## 🛠️ Comandos Útiles
-
-### Desarrollo
-
-```bash
-# Iniciar en modo desarrollo
-docker-compose up --build
-
-# Ver logs en tiempo real
-docker-compose logs -f
-
-# Detener servicios
-docker-compose down
-
-# Limpiar todo (incluyendo volúmenes)
-docker-compose down -v
-```
-
-### Producción
-
-```bash
-# Iniciar en producción
-docker-compose -f docker-compose.prod.yml up --build -d
-
-# Ver estado de contenedores
-docker-compose -f docker-compose.prod.yml ps
-
-# Reiniciar servicios
-docker-compose -f docker-compose.prod.yml restart
-```
-
-### Mantenimiento
-
-```bash
-# Limpiar caché de Docker
-docker builder prune -a -f
-
-# Ver logs del servidor
-docker logs blink-app
-
-# Ver logs de Redis
-docker logs redis-service
-
-# Acceder al contenedor
-docker exec -it blink-app sh
-```
-
-## 🐛 Solución de Problemas
-
-### El botón "Generar Enlace" no funciona
-
-**Problema:** Errores de CSP en la consola del navegador.
-
-**Solución:** 
-- Desactiva temporalmente bloqueadores de anuncios (AdGuard, uBlock) para `localhost`
-- O añade `localhost` a la lista blanca de tu bloqueador
-
-### Puerto 3000 ya está en uso
-
-**Solución:**
-```bash
-# Detener todos los contenedores
-docker-compose down --remove-orphans
-
-# O cambiar el puerto en .env
-PORT=3001
-```
-
-### Redis no se conecta
-
-**Solución:**
-```bash
-# Verificar que Redis esté corriendo
-docker ps | grep redis
-
-# Reiniciar Redis
-docker-compose restart redis-service
-```
-
-### El modal de contraseña no aparece
-
-**Solución:**
-- Asegúrate de que la aplicación esté actualizada: `docker-compose up --build -d`
-- Limpia la caché del navegador (Ctrl+Shift+R)
-
 ## 📁 Estructura del Proyecto
 
 ```
@@ -256,36 +148,14 @@ encriptador/
 ├── docker-compose.prod.yml  # Configuración producción
 ├── .env.example         # Ejemplo de variables de entorno
 ├── .dockerignore        # Archivos ignorados por Docker
-└── README.md            # Este archivo
+└── README.md            # Guía de uso
 ```
 
-## 🤝 Contribuir
-
-Las contribuciones son bienvenidas. Por favor:
-
-1. Haz fork del proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la licencia MIT. Ver el archivo `LICENSE` para más detalles.
-
-## 🔐 Privacidad y Seguridad
+## Privacidad y Seguridad
 
 - **Zero-knowledge:** El servidor nunca tiene acceso a tus mensajes sin encriptar
 - **Sin registro:** No se almacenan logs de contenido
 - **Autodestrucción:** Los mensajes se eliminan automáticamente
 - **Código abierto:** Puedes auditar el código completo
-
-## 📞 Soporte
-
-Si encuentras algún problema o tienes preguntas:
-
-1. Revisa la sección de [Solución de Problemas](#-solución-de-problemas)
-2. Abre un issue en GitHub
-3. Consulta la documentación técnica en el código
 
 ---
