@@ -136,6 +136,28 @@ button:disabled {
     box-shadow: none;
 }
 
+/* Language Switcher */
+.language-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    font-size: 0.85em;
+    padding: 8px 16px;
+    width: auto;
+    text-transform: none;
+    letter-spacing: 0;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+}
+
+.language-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary);
+    border-color: var(--primary);
+    transform: none;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+}
+
+
 /* Toast Notification */
 .toast {
     position: fixed;

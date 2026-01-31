@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-i18n-title="index.title">
 
 <head>
     <meta charset="UTF-8">
@@ -14,36 +14,39 @@
 
 <body>
     <div class="container">
-        <h2>🔒 Blink</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 data-i18n="index.heading">🔒 Blink</h2>
+            <button id="languageBtn" class="language-btn">Switch to English</button>
+        </div>
 
-        <label>Mensaje</label>
-        <textarea id="message" placeholder="Escribe el contenido de tu mensaje..."></textarea>
+        <label data-i18n="index.messageLabel">Mensaje</label>
+        <textarea id="message" data-i18n-placeholder="index.messagePlaceholder" placeholder="Escribe el contenido de tu mensaje..."></textarea>
 
         <div class="settings-grid">
             <div>
-                <label>Tiempo de validez</label>
+                <label data-i18n="index.ttlLabel">Tiempo de validez</label>
                 <select id="ttl">
-                    <option value="3600">1 Hora</option>
-                    <option value="86400">24 Horas</option>
-                    <option value="604800">7 Días</option>
-                    <option value="60">1 Minuto</option>
+                    <option value="3600" data-i18n="index.ttlOptions.1hour">1 Hora</option>
+                    <option value="86400" data-i18n="index.ttlOptions.24hours">24 Horas</option>
+                    <option value="604800" data-i18n="index.ttlOptions.7days">7 Días</option>
+                    <option value="60" data-i18n="index.ttlOptions.1minute">1 Minuto</option>
                 </select>
             </div>
             <div>
-                <label>Límite de usos</label>
+                <label data-i18n="index.maxUsesLabel">Límite de usos</label>
                 <input type="number" id="maxUses" value="1" min="1" max="100">
             </div>
         </div>
 
-        <label style="margin-top: 15px;">Adjuntar Archivo (Max 10MB)</label>
+        <label style="margin-top: 15px;" data-i18n="index.fileLabel">Adjuntar Archivo (Max 10MB)</label>
         <div class="file-drop-zone" id="dropZone">
-            <p>📎 Arrastra tu archivo aquí o haz clic para seleccionar</p>
+            <p data-i18n="index.fileDropZone">📎 Arrastra tu archivo aquí o haz clic para seleccionar</p>
             <p id="fileName" style="color: var(--primary); margin-top: 10px; font-size: 0.9em;"></p>
         </div>
         <input type="file" id="fileInput" style="display: none;">
 
-        <label>Contraseña (Opcional)</label>
-        <input type="password" id="passwordInput" placeholder="Protege el enlace con una contraseña (opcional)">
+        <label data-i18n="index.passwordLabel">Contraseña (Opcional)</label>
+        <input type="password" id="passwordInput" data-i18n-placeholder="index.passwordPlaceholder" placeholder="Protege el enlace con una contraseña (opcional)">
 
         <div class="progress-container" id="progressContainer">
             <div class="progress-bar" id="progressBar"></div>
@@ -51,15 +54,15 @@
 
         <button id="generateBtn">
             <div class="spinner" id="spinner"></div>
-            <span id="btnText">Generar Enlace Seguro</span>
+            <span id="btnText" data-i18n="index.generateBtn">Generar Enlace Seguro</span>
         </button>
     </div>
 
     <div class="modal-overlay" id="linkModal">
         <div class="modal">
             <span class="close-modal" id="closeModalBtn">&times;</span>
-            <h3 style="color: var(--primary); margin-top: 0;">🔗 ¡Enlace Listo!</h3>
-            <p style="font-size: 0.9em; color: var(--text-muted); margin-bottom: 20px;">Comparte este enlace con el
+            <h3 style="color: var(--primary); margin-top: 0;" data-i18n="index.modal.title">🔗 ¡Enlace Listo!</h3>
+            <p style="font-size: 0.9em; color: var(--text-muted); margin-bottom: 20px;" data-i18n="index.modal.subtitle">Comparte este enlace con el
                 destinatario.</p>
 
             <div id="qrCodeContainer"></div>
@@ -71,8 +74,8 @@
             </div>
 
             <div style="display: flex; gap: 10px;">
-                <button class="copy-btn" id="modalCopyBtn" style="width: 100%;">📋 Copiar Enlace</button>
-                <button class="copy-btn" id="emailBtn" style="width: 100%; background: rgba(255, 255, 255, 0.2);">📧
+                <button class="copy-btn" id="modalCopyBtn" style="width: 100%;" data-i18n="index.modal.copyBtn">📋 Copiar Enlace</button>
+                <button class="copy-btn" id="emailBtn" style="width: 100%; background: rgba(255, 255, 255, 0.2);" data-i18n="index.modal.emailBtn">📧
                     Enviar por Correo</button>
             </div>
         </div>
@@ -81,6 +84,7 @@
     <div id="toast" class="toast">Notificación</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="i18n.js"></script>
     <script src="app.js"></script>
 </body>
 

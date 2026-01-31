@@ -17,9 +17,9 @@ function showToast(message, type = 'success') {
 function copyContent() {
     const text = document.getElementById('messageArea').innerText;
     navigator.clipboard.writeText(text).then(() => {
-        showToast("¡Contenido copiado!");
+        showToast(t("view.toast.contentCopied"));
     }).catch(() => {
-        showToast("Error al copiar", "error");
+        showToast(t("view.toast.copyError"), "error");
     });
 }
 
@@ -49,10 +49,10 @@ async function decryptMessage() {
 
     try {
         btn.disabled = true;
-        btn.innerText = "Procesando...";
+        btn.innerText = t("common.processing");
 
         const hash = window.location.hash.substring(1);
-        if (!hash) throw new Error("Enlace incompleto o inválido.");
+        if (!hash) throw new Error(t("view.errors.invalidLink"));
 
         const parts = hash.split(':');
         globalId = parts[0];
@@ -62,8 +62,8 @@ async function decryptMessage() {
 
         if (!response.ok) {
             const errData = await response.json().catch(() => ({}));
-            if (response.status === 410) throw new Error("Este mensaje ya fue eliminado o expiró.");
-            throw new Error(errData.error || "Error al obtener el mensaje");
+            if (response.status === 410) throw new Error(t("view.errors.messageDeleted"));
+            throw new Error(errData.error || t("view.errors.decryptError"));
         }
 
         globalData = await response.json();
@@ -74,10 +74,10 @@ async function decryptMessage() {
             void modal.offsetWidth;
             modal.classList.add('show');
             btn.disabled = false;
-            btn.innerText = "Ver Contenido Secreto";
+            btn.innerText = t("view.decryptBtn");
             return;
         } else {
-            if (!keyInUrl) throw new Error("Falta la clave en el enlace.");
+            if (!keyInUrl) throw new Error(t("view.errors.missingKey"));
             const key = await window.crypto.subtle.importKey(
                 "raw", base64ToArrayBuffer(keyInUrl), "AES-GCM", true, ["decrypt"]
             );
@@ -94,7 +94,7 @@ async function handlePasswordSubmit() {
     const attemptsDisplay = document.getElementById('attemptsDisplay');
 
     if (!password) {
-        showToast("Introduce una contraseña", "error");
+        showToast(t("view.toast.passwordRequired"), "error");
         return;
     }
 
@@ -118,12 +118,12 @@ async function handlePasswordSubmit() {
         if (remaining <= 0) {
             globalData = null;
             document.getElementById('passwordModal').style.display = 'none';
-            handleError(new Error("Se han excedido los intentos de contraseña. El mensaje ha sido destruido por seguridad."));
+            handleError(new Error(t("view.passwordModal.maxAttemptsExceeded")));
             return;
         }
 
-        attemptsDisplay.innerText = `Contraseña incorrecta. Intentos restantes: ${remaining}`;
-        showToast(`Contraseña incorrecta. Te quedan ${remaining} intentos.`, "warning");
+        attemptsDisplay.innerText = t("view.passwordModal.incorrectAttempts", { remaining });
+        showToast(t("view.toast.passwordIncorrect", { remaining }), "warning");
     }
 }
 
@@ -172,6 +172,12 @@ async function performDecryption(key) {
             fileArea.style.display = 'block';
             nameDisplay.innerText = fileName;
 
+            // Update file attached text with translation
+            const fileAttachedText = document.getElementById('fileAttachedText');
+            if (fileAttachedText) {
+                fileAttachedText.innerHTML = t("view.fileAttached", { fileName: `<span id="fileNameDisplay">${fileName}</span>` });
+            }
+
             downloadBtn.onclick = () => {
                 const a = document.createElement('a');
                 a.href = fileUrl;
@@ -182,8 +188,8 @@ async function performDecryption(key) {
             };
 
         } catch (e) {
-            console.error("Error desencriptando archivo", e);
-            showToast("Error al desencriptar adjunto", "error");
+            console.error(t("view.errors.fileDecryptError"), e);
+            showToast(t("view.toast.fileDecryptError"), "error");
         }
     }
 }
@@ -196,7 +202,7 @@ function handleError(error) {
     msgArea.style.borderColor = 'var(--error)';
     msgArea.style.background = 'rgba(255, 77, 77, 0.05)';
     msgArea.innerHTML = `<span class="error">${error.message}</span>`;
-    btn.innerText = "Error de Acceso";
+    btn.innerText = t("view.errors.accessError");
     btn.style.backgroundColor = "var(--error)";
     btn.style.color = "white";
 }

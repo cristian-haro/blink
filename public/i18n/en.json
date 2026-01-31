@@ -1,0 +1,86 @@
+{
+    "common": {
+        "appName": "Blink",
+        "appTagline": "Share securely",
+        "copy": "Copy",
+        "close": "Close",
+        "processing": "Processing...",
+        "error": "Error"
+    },
+    "index": {
+        "title": "Blink | Share securely",
+        "heading": "🔒 Blink",
+        "messageLabel": "Message",
+        "messagePlaceholder": "Write your message content...",
+        "ttlLabel": "Validity period",
+        "ttlOptions": {
+            "1hour": "1 Hour",
+            "24hours": "24 Hours",
+            "7days": "7 Days",
+            "1minute": "1 Minute"
+        },
+        "maxUsesLabel": "Usage limit",
+        "fileLabel": "Attach File (Max 10MB)",
+        "fileDropZone": "📎 Drag your file here or click to select",
+        "fileSelected": "Selected: {fileName}",
+        "passwordLabel": "Password (Optional)",
+        "passwordPlaceholder": "Protect the link with a password (optional)",
+        "generateBtn": "Generate Secure Link",
+        "modal": {
+            "title": "🔗 Link Ready!",
+            "subtitle": "Share this link with the recipient.",
+            "copyBtn": "📋 Copy Link",
+            "emailBtn": "📧 Send by Email"
+        },
+        "toast": {
+            "noContent": "Write a message or attach a file.",
+            "fileTooLarge": "File is too large (Max 10MB).",
+            "linkGenerated": "Link generated successfully!",
+            "linkCopied": "Link copied to clipboard!",
+            "copyError": "Copy error",
+            "serverError": "Server error"
+        },
+        "email": {
+            "subject": "I've sent you a secure message",
+            "body": "Hello,\n\nI'm sending you an encrypted message via blink.\n\nYou can view it here:\n{link}\n\nNote: This link may self-destruct after reading."
+        }
+    },
+    "view": {
+        "title": "blink | Message Received",
+        "heading": "🔒 Secure File",
+        "warningBox": "⚠️ <strong>Warning:</strong> This message may self-destruct after reading. Make sure to copy it if it's important.",
+        "decryptBtn": "View Secret Content",
+        "copyBtn": "📋 Copy All",
+        "fileAttached": "📎 <strong>Attached File:</strong> {fileName}",
+        "downloadBtn": "💾 Download File",
+        "passwordModal": {
+            "title": "🔐 Password Required",
+            "subtitle": "This content is password protected.",
+            "warning": "⚠️ <strong>DO NOT RELOAD THE PAGE</strong> or you will lose the message forever.",
+            "placeholder": "Enter the password",
+            "unlockBtn": "Unlock",
+            "incorrectAttempts": "Incorrect password. Remaining attempts: {remaining}",
+            "maxAttemptsExceeded": "Password attempts exceeded. The message has been destroyed for security."
+        },
+        "toast": {
+            "contentCopied": "Content copied!",
+            "copyError": "Copy error",
+            "passwordRequired": "Enter a password",
+            "passwordIncorrect": "Incorrect password. You have {remaining} attempts left.",
+            "fileDecryptError": "Error decrypting attachment"
+        },
+        "errors": {
+            "invalidLink": "Incomplete or invalid link.",
+            "messageDeleted": "This message has already been deleted or expired.",
+            "messageNotFound": "Message not found or expired",
+            "missingKey": "Missing key in the link.",
+            "decryptError": "Error retrieving message",
+            "fileDecryptError": "Error decrypting file",
+            "accessError": "Access Error"
+        }
+    },
+    "language": {
+        "switchTo": "Cambiar a Español",
+        "current": "English"
+    }
+}

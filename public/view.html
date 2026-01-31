@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-i18n-title="view.title">
 
 <head>
     <meta charset="UTF-8">
@@ -15,41 +15,48 @@
 <body>
     <div class="modal-overlay" id="passwordModal">
         <div class="modal">
-            <h3>🔐 Contraseña Requerida</h3>
-            <p>Este contenido está protegido por contraseña.</p>
-            <p style="color: #ffcc00; font-size: 0.9em; margin-bottom: 20px;">⚠️ <strong>NO RECARGUES LA PÁGINA</strong>
+            <h3 data-i18n="view.passwordModal.title">🔐 Contraseña Requerida</h3>
+            <p data-i18n="view.passwordModal.subtitle">Este contenido está protegido por contraseña.</p>
+            <p style="color: #ffcc00; font-size: 0.9em; margin-bottom: 20px;" data-i18n="view.passwordModal.warning">⚠️
+                <strong>NO RECARGUES LA PÁGINA</strong>
                 o perderás el mensaje para siempre.</p>
-            <input type="password" id="unlockPassword" placeholder="Introduce la contraseña">
-            <button id="unlockBtn">Desbloquear</button>
+            <input type="password" id="unlockPassword" data-i18n-placeholder="view.passwordModal.placeholder"
+                placeholder="Introduce la contraseña">
+            <button id="unlockBtn" data-i18n="view.passwordModal.unlockBtn">Desbloquear</button>
             <p id="attemptsDisplay" style="color: var(--error); margin-top: 10px; font-size: 0.85em;"></p>
         </div>
     </div>
 
     <div class="container">
-        <h2>🔒 Archivo Seguro</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 data-i18n="view.heading">🔒 Archivo Seguro</h2>
+            <button id="languageBtn" class="language-btn">Switch to English</button>
+        </div>
 
-        <div class="warning-box">
+        <div class="warning-box" data-i18n="view.warningBox">
             ⚠️ <strong>Atención:</strong> Es posible que este mensaje se autodestruya después de leerlo. Asegúrate de
             copiarlo si es importante.
         </div>
 
-        <button id="decryptBtn">Ver Contenido Secreto</button>
+        <button id="decryptBtn" data-i18n="view.decryptBtn">Ver Contenido Secreto</button>
 
         <div id="messageArea"></div>
         <div id="fileArea" style="display:none; margin-top: 15px;">
-            <p>📎 <strong>Archivo Adjunto:</strong> <span id="fileNameDisplay"></span></p>
-            <button id="downloadBtn" style="background:#007bff;">💾 Descargar Archivo</button>
+            <p id="fileAttachedText">📎 <strong>Archivo Adjunto:</strong> <span id="fileNameDisplay"></span></p>
+            <button id="downloadBtn" style="background:#007bff;" data-i18n="view.downloadBtn">💾 Descargar
+                Archivo</button>
         </div>
 
         <div id="qrCodeContainer"
             style="margin: 20px auto; display:none; background:white; padding:10px; width:fit-content; border-radius:10px;">
         </div>
 
-        <button id="copyBtn">📋 Copiar Todo</button>
+        <button id="copyBtn" data-i18n="view.copyBtn">📋 Copiar Todo</button>
     </div>
 
     <div id="toast" class="toast">Notificación</div>
 
+    <script src="i18n.js"></script>
     <script src="view.js"></script>
 </body>
 

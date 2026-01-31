@@ -41,18 +41,18 @@ async function createSecret() {
     const progressContainer = document.getElementById('progressContainer');
 
     if (!text && fileInput.files.length === 0) {
-        showToast("Escribe un mensaje o adjunta un archivo.", "error");
+        showToast(t("index.toast.noContent"), "error");
         return;
     }
 
     if (fileInput.files.length > 0 && fileInput.files[0].size > 10 * 1024 * 1024) {
-        showToast("El archivo es demasiado grande (Max 10MB).", "error");
+        showToast(t("index.toast.fileTooLarge"), "error");
         return;
     }
 
     btn.disabled = true;
     spinner.style.display = 'inline-block';
-    btnText.innerText = "Procesando...";
+    btnText.innerText = t("common.processing");
     progressContainer.style.display = 'block';
     progressBar.style.width = '10%';
 
@@ -122,7 +122,7 @@ async function createSecret() {
 
         const data = await response.json();
 
-        if (!response.ok) throw new Error(data.error || "Error del servidor");
+        if (!response.ok) throw new Error(data.error || t("index.toast.serverError"));
 
         let url;
         if (password) {
@@ -132,7 +132,7 @@ async function createSecret() {
         }
 
         showModal(url);
-        showToast("¡Enlace generado exitosamente!");
+        showToast(t("index.toast.linkGenerated"));
 
     } catch (error) {
         console.error(error);
@@ -140,7 +140,7 @@ async function createSecret() {
     } finally {
         btn.disabled = false;
         spinner.style.display = 'none';
-        btnText.innerText = "Generar Enlace Seguro";
+        btnText.innerText = t("index.generateBtn");
         setTimeout(() => {
             progressContainer.style.display = 'none';
             progressBar.style.width = '0%';
@@ -172,16 +172,16 @@ function closeModal() {
 function copyLink() {
     const linkText = document.getElementById('finalLink').innerText;
     navigator.clipboard.writeText(linkText).then(() => {
-        showToast("¡Enlace copiado al portapapeles!");
+        showToast(t("index.toast.linkCopied"));
     }).catch(err => {
-        showToast("Error al copiar", "error");
+        showToast(t("index.toast.copyError"), "error");
     });
 }
 
 function sendEmail() {
     const linkText = document.getElementById('finalLink').innerText;
-    const subject = "Te he enviado un mensaje seguro";
-    const body = `Hola,\n\nTe envío un mensaje encriptado mediante blink.\n\nPuedes verlo aquí:\n${linkText}\n\nNota: Este enlace podría autodestruirse después de leerlo.`;
+    const subject = t("index.email.subject");
+    const body = t("index.email.body", { link: linkText });
 
     window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fileInput.addEventListener('change', () => {
         if (fileInput.files.length > 0) {
-            fileNameDisplay.innerText = `Seleccionado: ${fileInput.files[0].name}`;
+            fileNameDisplay.innerText = t("index.fileSelected", { fileName: fileInput.files[0].name });
         } else {
             fileNameDisplay.innerText = '';
         }
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
             fileInput.files = e.dataTransfer.files;
             if (fileInput.files.length > 0) {
-                fileNameDisplay.innerText = `Seleccionado: ${fileInput.files[0].name}`;
+                fileNameDisplay.innerText = t("index.fileSelected", { fileName: fileInput.files[0].name });
             }
         }
     });

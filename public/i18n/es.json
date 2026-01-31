@@ -1,0 +1,86 @@
+{
+    "common": {
+        "appName": "Blink",
+        "appTagline": "Comparte seguro",
+        "copy": "Copiar",
+        "close": "Cerrar",
+        "processing": "Procesando...",
+        "error": "Error"
+    },
+    "index": {
+        "title": "Blink | Comparte seguro",
+        "heading": "🔒 Blink",
+        "messageLabel": "Mensaje",
+        "messagePlaceholder": "Escribe el contenido de tu mensaje...",
+        "ttlLabel": "Tiempo de validez",
+        "ttlOptions": {
+            "1hour": "1 Hora",
+            "24hours": "24 Horas",
+            "7days": "7 Días",
+            "1minute": "1 Minuto"
+        },
+        "maxUsesLabel": "Límite de usos",
+        "fileLabel": "Adjuntar Archivo (Max 10MB)",
+        "fileDropZone": "📎 Arrastra tu archivo aquí o haz clic para seleccionar",
+        "fileSelected": "Seleccionado: {fileName}",
+        "passwordLabel": "Contraseña (Opcional)",
+        "passwordPlaceholder": "Protege el enlace con una contraseña (opcional)",
+        "generateBtn": "Generar Enlace Seguro",
+        "modal": {
+            "title": "🔗 ¡Enlace Listo!",
+            "subtitle": "Comparte este enlace con el destinatario.",
+            "copyBtn": "📋 Copiar Enlace",
+            "emailBtn": "📧 Enviar por Correo"
+        },
+        "toast": {
+            "noContent": "Escribe un mensaje o adjunta un archivo.",
+            "fileTooLarge": "El archivo es demasiado grande (Max 10MB).",
+            "linkGenerated": "¡Enlace generado exitosamente!",
+            "linkCopied": "¡Enlace copiado al portapapeles!",
+            "copyError": "Error al copiar",
+            "serverError": "Error del servidor"
+        },
+        "email": {
+            "subject": "Te he enviado un mensaje seguro",
+            "body": "Hola,\n\nTe envío un mensaje encriptado mediante blink.\n\nPuedes verlo aquí:\n{link}\n\nNota: Este enlace podría autodestruirse después de leerlo."
+        }
+    },
+    "view": {
+        "title": "blink | Mensaje Recibido",
+        "heading": "🔒 Archivo Seguro",
+        "warningBox": "⚠️ <strong>Atención:</strong> Es posible que este mensaje se autodestruya después de leerlo. Asegúrate de copiarlo si es importante.",
+        "decryptBtn": "Ver Contenido Secreto",
+        "copyBtn": "📋 Copiar Todo",
+        "fileAttached": "📎 <strong>Archivo Adjunto:</strong> {fileName}",
+        "downloadBtn": "💾 Descargar Archivo",
+        "passwordModal": {
+            "title": "🔐 Contraseña Requerida",
+            "subtitle": "Este contenido está protegido por contraseña.",
+            "warning": "⚠️ <strong>NO RECARGUES LA PÁGINA</strong> o perderás el mensaje para siempre.",
+            "placeholder": "Introduce la contraseña",
+            "unlockBtn": "Desbloquear",
+            "incorrectAttempts": "Contraseña incorrecta. Intentos restantes: {remaining}",
+            "maxAttemptsExceeded": "Se han excedido los intentos de contraseña. El mensaje ha sido destruido por seguridad."
+        },
+        "toast": {
+            "contentCopied": "¡Contenido copiado!",
+            "copyError": "Error al copiar",
+            "passwordRequired": "Introduce una contraseña",
+            "passwordIncorrect": "Contraseña incorrecta. Te quedan {remaining} intentos.",
+            "fileDecryptError": "Error al desencriptar adjunto"
+        },
+        "errors": {
+            "invalidLink": "Enlace incompleto o inválido.",
+            "messageDeleted": "Este mensaje ya fue eliminado o expiró.",
+            "messageNotFound": "Mensaje no encontrado o expirado",
+            "missingKey": "Falta la clave en el enlace.",
+            "decryptError": "Error al obtener el mensaje",
+            "fileDecryptError": "Error desencriptando archivo",
+            "accessError": "Error de Acceso"
+        }
+    },
+    "language": {
+        "switchTo": "Switch to English",
+        "current": "Español"
+    }
+}
