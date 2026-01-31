@@ -6,10 +6,10 @@ Emisor:
 ![Emisor](img/Emisor.png)
 
 Aviso receptor:
-![Emisor]('img/Receptor 1-1.png')
+![Aviso receptor](img/Receptor1_1.png)
 
-Mensaje desencriptado
-![Emisor](img/Receptor 1-2.png)
+Mensaje desencriptado:
+![Mensaje desencriptado](img/Receptor1_2.png)
 
 ## Características
 
