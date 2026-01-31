@@ -15,7 +15,7 @@
 
 ## Instalación
 
-### Instalación con Docker (Recomendado)
+### Instalación con Docker
 
 1. **Clona el repositorio:**
    ```bash
