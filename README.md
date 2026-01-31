@@ -1,15 +1,199 @@
-# Blink - Compartición Segura de Mensajes
+# Blink
 
-**Blink** es una herramienta de código abierto para compartir mensajes y archivos de forma segura mediante encriptación de extremo a extremo. Los mensajes se autodestruyen después de ser leídos o cuando expira su tiempo de vida, garantizando privacidad total.
+---
+## 🌐 Language / Idioma
+- [English](#english) 🇬🇧
+- [Español](#español) 🇪🇸
+
+---
+
+<a name="english"></a>
+# 🇬🇧 ENGLISH VERSION
+
+**Blink - Secure Message Sharing** is an open-source tool for securely sharing messages and files using end-to-end encryption. Messages self-destruct after being read or when their lifetime expires, ensuring total privacy.
+
+**Sender:**
+![Sender](img/Emisor.png)
+
+**Receiver notification:**
+![Sender](img/Receptor1_1.png)
+
+**Decrypted message**
+![Sender](img/Receptor1_2.png)
+
+## Features
+
+- **End-to-end encryption** with 256-bit AES-GCM
+- **Configurable lifetime** - Messages expire automatically
+- **Optional password protection** - Additional security with PBKDF2
+- **Attach files** up to 10MB (also encrypted)
+- **QR codes** for easy link sharing
+- **Zero-knowledge** - The server never sees the unencrypted content
+- **Usage limit** - Control how many times the message can be accessed
+- **Dockerized** for easy deployment
+
+## Installation
+
+### Installation with Docker
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/cristian-haro/blink.git
+   cd blink
+   ```
+
+2. **Configure environment variables (optional):**
+   
+   Copy the example file:
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Edit `.env` according to your needs:
+   ```env
+   PORT=3000
+   REDIS_URL=redis://redis-service:6379
+   MAX_BODY_SIZE=50mb
+   RATE_LIMIT_WINDOW_MS=900000
+   RATE_LIMIT_MAX_REQUESTS=1000
+   ```
+
+3. **Start the application:**
+   ```bash
+   docker-compose up --build -d
+   ```
+
+4. **Access the application:**
+   
+   Open your browser at `http://localhost:3000`
+
+### Production Installation
+
+For production environments, use the `docker-compose.prod.yml` file:
+
+```bash
+docker-compose -f docker-compose.prod.yml up --build -d
+```
+
+Be sure to set the appropriate environment variables for production.
+
+## User Guide
+
+### Send a Secure Message
+
+1. **Write your message** in the main text area
+2. **Configure the options:**
+   - **Validity period:** How long the message will be available (1 hour, 24 hours, 7 days)
+   - **Usage limit:** How many times the message can be viewed (default: 1)
+   - **Password (optional):** Additional password protection
+3. **Attach a file (optional):** Drag and drop or click on the file area
+4. **Click on “Generate Secure Link”**
+5. **Share the generated link:**
+   - Copy the link directly
+   - Scan the QR code
+   - Send by email
+
+### Receive a Secure Message
+
+1. **Open the link** that was shared with you
+2. **If it is password protected:**
+   - Enter the password provided
+   - You have 3 attempts before the message self-destructs
+3. **Click “View Secret Content”**
+4. **Read the message and download any attachments**
+5. **Copy the content** if you need to save it (the message will be destroyed)
+
+> **IMPORTANT:** Do not reload the page after viewing the message, as it may self-destruct and you will lose access.
+
+## Configuration
+
+### Environment Variables
+
+| Variable | Description | Default Value |
+|----------|-------------|-------------------|
+| `PORT` | Server port | `3000` |
+| `REDIS_URL` | Redis connection URL | `redis://localhost:6379` |
+| `MAX_BODY_SIZE` | Maximum request body size | `50mb` |
+| `RATE_LIMIT_WINDOW_MS` | Time window for rate limiting (ms) | `900000` (15 min) |
+| `RATE_LIMIT_MAX_REQUESTS` | Maximum requests per window | `1000` |
+
+### Limits and Restrictions
+
+- **Maximum file size:** 10 MB
+- **Maximum lifetime:** 7 days
+- **Password attempts:** 3 attempts before self-destruction
+- **Maximum views:** Configurable (1-100)
+
+---
+
+### Security
+
+#### Encryption
+- **Algorithm:** 256-bit AES-GCM
+- **Key derivation (with password):** PBKDF2 with 100,000 iterations and SHA-256
+- **Initialization vector (IV):** 12 random bytes per message
+- **Salt:** 16 random bytes for key derivation
+
+#### Security Flow
+
+1. **Sending:**
+   - The message is encrypted in the sender's browser
+   - Only encrypted data is sent to the server
+   - The encryption key is included in the URL fragment (#) that never reaches the server
+
+2. **Storage:**
+   - Redis stores only encrypted data
+   - Automatic TTL for expiration
+   - View counter for self-destruction
+
+3. **Receipt:**
+   - The key is extracted from the URL fragment in the browser
+   - Decryption occurs entirely on the client
+   - The server never has access to the key or unencrypted content
+
+## Project Structure
+
+```
+blink/
+├── public/              # Static files
+│   ├── index.html       # Main page (send)
+│   ├── view.html        # Display page (receive)
+│   ├── style.css        # Global styles
+│   ├── app.js           # Sender logic
+│   └── view.js          # Receiver logic
+├── server.js            # Express server
+├── package.json         # Node.js dependencies
+├── Dockerfile           # Docker image
+├── docker-compose.yml   # Development configuration
+├── docker-compose.prod.yml  # Production configuration
+├── .env.example         # Example environment variables
+├── .dockerignore        # Files ignored by Docker
+└── README.md            # User guide
+```
+
+## Privacy and Security
+
+- **Zero-knowledge:** The server never has access to your unencrypted messages
+- **No logging:** No content logs are stored
+- **Self-destruction:** Messages are automatically deleted
+- **Open source:** You can audit the entire code
+
+---
+
+
+<a name="español"></a>
+# 🇪🇸 VERSIÓN EN ESPAÑOL
+
+**Blink - Compartición Segura de Mensajes** es una herramienta de código abierto para compartir mensajes y archivos de forma segura mediante encriptación de extremo a extremo. Los mensajes se autodestruyen después de ser leídos o cuando expira su tiempo de vida, garantizando privacidad total.
 
 Emisor:
 ![Emisor](img/Emisor.png)
 
 Aviso receptor:
-![Emisor]('img/Receptor 1-1.png')
+![Emisor](img/Receptor1_1.png)
 
 Mensaje desencriptado
-![Emisor](img/Receptor 1-2.png)
+![Emisor](img/Receptor1_2.png)
 
 ## Características
 
@@ -144,7 +328,7 @@ Asegúrate de configurar las variables de entorno apropiadas para producción.
 ## Estructura del Proyecto
 
 ```
-encriptador/
+blink/
 ├── public/              # Archivos estáticos
 │   ├── index.html       # Página principal (envío)
 │   ├── view.html        # Página de visualización (recepción)
