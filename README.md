@@ -86,7 +86,7 @@ Asegúrate de configurar las variables de entorno apropiadas para producción.
 
 > **IMPORTANTE:** No recargues la página después de ver el mensaje, ya que podría autodestruirse y perderás el acceso.
 
-## 🔧 Configuración
+## Configuración
 
 ### Variables de Entorno
 
@@ -105,6 +105,7 @@ Asegúrate de configurar las variables de entorno apropiadas para producción.
 - **Intentos de contraseña:** 3 intentos antes de autodestrucción
 - **Vistas máximas:** Configurable (1-100)
 
+---
 
 ### Seguridad
 
@@ -131,7 +132,7 @@ Asegúrate de configurar las variables de entorno apropiadas para producción.
    - La desencriptación ocurre completamente en el cliente
    - El servidor nunca tiene acceso a la clave o contenido sin encriptar
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 encriptador/
