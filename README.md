@@ -6,7 +6,7 @@ Emisor:
 ![Emisor](img/Emisor.png)
 
 Aviso receptor:
-![Emisor]("img/Receptor 1-1.png")
+![Emisor]('img/Receptor 1-1.png')
 
 Mensaje desencriptado
 ![Emisor](img/Receptor 1-2.png)
