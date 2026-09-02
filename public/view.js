@@ -172,10 +172,13 @@ async function performDecryption(key) {
             fileArea.style.display = 'block';
             nameDisplay.innerText = fileName;
 
-            // Update file attached text with translation
+            // Update file attached text safely with translation
             const fileAttachedText = document.getElementById('fileAttachedText');
             if (fileAttachedText) {
-                fileAttachedText.innerHTML = t("view.fileAttached", { fileName: `<span id="fileNameDisplay">${fileName}</span>` });
+                const prefix = t("view.fileAttached", { fileName: '' }).replace(/<[^>]*>?/gm, '');
+                fileAttachedText.innerHTML = `📎 <strong>${prefix.replace('📎', '').trim()}</strong> <span id="fileNameDisplay"></span>`;
+                const display = document.getElementById('fileNameDisplay');
+                if (display) display.textContent = fileName;
             }
 
             downloadBtn.onclick = () => {
@@ -201,7 +204,12 @@ function handleError(error) {
     msgArea.style.display = 'block';
     msgArea.style.borderColor = 'var(--error)';
     msgArea.style.background = 'rgba(255, 77, 77, 0.05)';
-    msgArea.innerHTML = `<span class="error">${error.message}</span>`;
+    msgArea.textContent = '';
+    const span = document.createElement('span');
+    span.className = 'error';
+    span.textContent = error.message;
+    msgArea.appendChild(span);
+
     btn.innerText = t("view.errors.accessError");
     btn.style.backgroundColor = "var(--error)";
     btn.style.color = "white";
@@ -211,4 +219,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('unlockBtn').addEventListener('click', handlePasswordSubmit);
     document.getElementById('decryptBtn').addEventListener('click', decryptMessage);
     document.getElementById('copyBtn').addEventListener('click', copyContent);
+
+    const unlockPassword = document.getElementById('unlockPassword');
+    if (unlockPassword) {
+        unlockPassword.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                handlePasswordSubmit();
+            }
+        });
+    }
 });

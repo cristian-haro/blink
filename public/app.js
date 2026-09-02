@@ -1,4 +1,12 @@
-const arrayBufferToBase64 = (buffer) => btoa(String.fromCharCode(...new Uint8Array(buffer)));
+function arrayBufferToBase64(buffer) {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+    const chunkSize = 0x8000;
+    for (let i = 0; i < bytes.length; i += chunkSize) {
+        binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+    }
+    return btoa(binary);
+}
 
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
@@ -221,6 +229,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('linkModal').addEventListener('click', (e) => {
         if (e.target === document.getElementById('linkModal')) {
             closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('linkModal');
+            if (modal && modal.classList.contains('show')) {
+                closeModal();
+            }
         }
     });
 
