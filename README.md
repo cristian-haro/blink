@@ -155,7 +155,12 @@ Be sure to set the appropriate environment variables for production.
 
 ```
 blink/
+├── .maestro/            # Maestro E2E test suite
+│   ├── config.yaml      # Maestro environment config
+│   └── web/             # Automated E2E web flows
 ├── public/              # Static files
+│   ├── i18n/            # Translation JSON files (en.json, es.json)
+│   ├── i18n.js          # Internationalization utility
 │   ├── index.html       # Main page (send)
 │   ├── view.html        # Display page (receive)
 │   ├── style.css        # Global styles
@@ -169,6 +174,21 @@ blink/
 ├── .env.example         # Example environment variables
 ├── .dockerignore        # Files ignored by Docker
 └── README.md            # User guide
+```
+
+## Testing & Quality Assurance (E2E Maestro)
+
+Blink includes an automated end-to-end testing suite using [Maestro](https://maestro.mobile.dev/) for web verification:
+
+```bash
+# Run the complete web E2E test suite
+npm run test:maestro
+
+# Run tests targeting a custom deployment URL
+maestro --env APP_URL=http://localhost:3000 test .maestro/web/
+
+# Run a specific flow (e.g., language toggle)
+maestro test .maestro/web/i18n-language-flow.yaml
 ```
 
 ## Privacy and Security
@@ -329,7 +349,12 @@ Asegúrate de configurar las variables de entorno apropiadas para producción.
 
 ```
 blink/
+├── .maestro/            # Suite de pruebas E2E Maestro
+│   ├── config.yaml      # Configuración de entorno Maestro
+│   └── web/             # Flujos E2E automatizados
 ├── public/              # Archivos estáticos
+│   ├── i18n/            # Archivos JSON de traducción (en.json, es.json)
+│   ├── i18n.js          # Utilidad de internacionalización
 │   ├── index.html       # Página principal (envío)
 │   ├── view.html        # Página de visualización (recepción)
 │   ├── style.css        # Estilos globales
@@ -343,6 +368,21 @@ blink/
 ├── .env.example         # Ejemplo de variables de entorno
 ├── .dockerignore        # Archivos ignorados por Docker
 └── README.md            # Guía de uso
+```
+
+## Pruebas y Calidad (E2E Maestro)
+
+Blink incluye una suite automatizada de pruebas end-to-end con [Maestro](https://maestro.mobile.dev/) para verificación web:
+
+```bash
+# Ejecutar la suite completa de tests E2E web
+npm run test:maestro
+
+# Ejecutar tests apuntando a una URL personalizada de despliegue
+maestro --env APP_URL=http://localhost:3000 test .maestro/web/
+
+# Ejecutar un flujo específico (ej. cambio de idioma)
+maestro test .maestro/web/i18n-language-flow.yaml
 ```
 
 ## Privacidad y Seguridad
