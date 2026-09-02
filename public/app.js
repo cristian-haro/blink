@@ -177,9 +177,41 @@ function closeModal() {
     }, 300);
 }
 
+function copyTextToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text).catch(() => fallbackCopyText(text));
+    }
+    return fallbackCopyText(text);
+}
+
+function fallbackCopyText(text) {
+    return new Promise((resolve, reject) => {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                resolve();
+            } else {
+                reject(new Error('Copy command failed'));
+            }
+        } catch (err) {
+            reject(err);
+        } finally {
+            textArea.remove();
+        }
+    });
+}
+
 function copyLink() {
     const linkText = document.getElementById('finalLink').innerText;
-    navigator.clipboard.writeText(linkText).then(() => {
+    copyTextToClipboard(linkText).then(() => {
         showToast(t("index.toast.linkCopied"));
     }).catch(err => {
         showToast(t("index.toast.copyError"), "error");
