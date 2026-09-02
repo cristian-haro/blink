@@ -1,0 +1,15 @@
+# Flow de prueba E2E: Vista del Receptor y Manejo de Enlaces Inválidos
+# Valida el comportamiento de la pantalla de recepción ante un enlace sin token o clave
+
+url: ${APP_URL}/view
+---
+# 1. Cargar la vista de recepción sin token en la URL
+- assertVisible: ".*Archivo Seguro.*"
+- assertVisible: "Ver Contenido Secreto"
+
+# 2. Intentar descifrar sin identificador válido
+- tapOn: "Ver Contenido Secreto"
+
+# 3. Validar mensaje de error mostrado al usuario
+- assertVisible: ".*Enlace incompleto o inválido.*"
+- assertVisible: "Error de Acceso"

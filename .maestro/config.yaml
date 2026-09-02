@@ -1,0 +1,2 @@
+env:
+  APP_URL: ${SPIKE_URL:-http://localhost:3000}

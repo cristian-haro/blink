@@ -1,0 +1,19 @@
+# Flow de prueba E2E Web para Blink
+# Ejecutado en Chromium contra la URL dinámica de Spike ($APP_URL)
+url: ${APP_URL}
+---
+# 1. Verificar carga inicial de la página
+- assertVisible: ".*Blink.*"
+
+# 2. Validar elementos principales de la interfaz
+- assertVisible: "Mensaje"
+- assertVisible: "Generar Enlace Seguro"
+
+# 3. Interactuar con el formulario
+- tapOn: "Escribe el contenido de tu mensaje..."
+- inputText: "Test automatizado E2E con Maestro y Spike"
+
+# 4. Verificar selector de idioma
+- tapOn: "Switch to English"
+- assertVisible: "Switch to Spanish"
+- tapOn: "Switch to Spanish"

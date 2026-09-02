@@ -1,0 +1,30 @@
+# Flow de prueba E2E: Internacionalización (i18n) y Cambio Dinámico de Idioma
+# Valida la correcta traducción de la interfaz entre Español e Inglés
+
+url: ${APP_URL}
+---
+# 1. Comprobar idioma inicial (Español)
+- assertVisible: "Mensaje"
+- assertVisible: "Tiempo de validez"
+- assertVisible: "Límite de usos"
+- assertVisible: "Generar Enlace Seguro"
+- assertVisible: "Switch to English"
+
+# 2. Cambiar a Inglés
+- tapOn: "Switch to English"
+
+# 3. Validar que la interfaz se traduce a Inglés
+- assertVisible: "Message"
+- assertVisible: "Validity period"
+- assertVisible: "Usage limit"
+- assertVisible: "Generate Secure Link"
+- assertVisible: "Cambiar a Español"
+
+# 4. Volver a Español
+- tapOn: "Cambiar a Español"
+
+# 5. Validar que se restablecen los textos en Español
+- assertVisible: "Mensaje"
+- assertVisible: "Tiempo de validez"
+- assertVisible: "Generar Enlace Seguro"
+- assertVisible: "Switch to English"

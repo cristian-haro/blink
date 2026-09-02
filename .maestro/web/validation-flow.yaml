@@ -1,0 +1,17 @@
+# Flow de prueba E2E: Validación de Formularios y Manejo de Errores
+# Verifica que la aplicación impida el envío de secretos vacíos y muestre notificaciones adecuadas
+
+url: ${APP_URL}
+---
+# 1. Verificar carga inicial
+- assertVisible: ".*Blink.*"
+- assertVisible: "Generar Enlace Seguro"
+
+# 2. Intentar generar enlace con campos vacíos
+- tapOn: "Generar Enlace Seguro"
+
+# 3. Validar toast / mensaje de advertencia
+- assertVisible: ".*Escribe un mensaje o adjunta un archivo.*"
+
+# 4. Asegurar que el modal no se abrió indebidamente
+- assertNotVisible: "🔗 ¡Enlace Listo!"
