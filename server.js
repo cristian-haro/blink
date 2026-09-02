@@ -12,14 +12,28 @@ const app = express();
 app.set('trust proxy', 1);
 const port = process.env.PORT || 3000;
 
-const redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379');
+const redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379', {
+    maxRetriesPerRequest: 1,
+    retryStrategy(times) {
+        return Math.min(times * 1000, 5000);
+    }
+});
 
 redis.on('connect', () => {
     console.log('Connected to Redis');
 });
 
+let lastWarned = 0;
 redis.on('error', (err) => {
-    console.error('Redis error:', err);
+    if (err.code === 'ECONNREFUSED') {
+        const now = Date.now();
+        if (now - lastWarned > 10000) {
+            console.warn(`[Redis] No se puede conectar a Redis en ${process.env.REDIS_URL || 'localhost:6379'} (ECONNREFUSED). Asegúrate de que Redis o Docker Desktop esté iniciado.`);
+            lastWarned = now;
+        }
+    } else {
+        console.error('Redis error:', err.message);
+    }
 });
 
 app.use(helmet({
