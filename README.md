@@ -1,7 +1,7 @@
 # Blink
 
 ---
-## 🌐 Language / Idioma
+##  Language / Idioma
 - [English](#english) 🇬🇧
 - [Español](#español) 🇪🇸
 
@@ -13,13 +13,13 @@
 **Blink - Secure Message Sharing** is an open-source tool for securely sharing messages and files using end-to-end encryption. Messages self-destruct after being read or when their lifetime expires, ensuring total privacy.
 
 **Sender:**
-![Sender](img/Emisor.png)
+![Sender](docs/assets/screenshots/Emisor.png)
 
 **Receiver notification:**
-![Sender](img/Receptor1_1.png)
+![Sender](docs/assets/screenshots/Receptor1_1.png)
 
 **Decrypted message**
-![Sender](img/Receptor1_2.png)
+![Sender](docs/assets/screenshots/Receptor1_2.png)
 
 ## Features
 
@@ -207,13 +207,13 @@ maestro test .maestro/web/i18n-language-flow.yaml
 **Blink - Compartición Segura de Mensajes** es una herramienta de código abierto para compartir mensajes y archivos de forma segura mediante encriptación de extremo a extremo. Los mensajes se autodestruyen después de ser leídos o cuando expira su tiempo de vida, garantizando privacidad total.
 
 Emisor:
-![Emisor](img/Emisor.png)
+![Emisor](docs/assets/screenshots/Emisor.png)
 
 Aviso receptor:
-![Emisor](img/Receptor1_1.png)
+![Emisor](docs/assets/screenshots/Receptor1_1.png)
 
 Mensaje desencriptado
-![Emisor](img/Receptor1_2.png)
+![Emisor](docs/assets/screenshots/Receptor1_2.png)
 
 ## Características
 
