@@ -128,9 +128,16 @@ async function createSecret() {
 
         progressBar.style.width = '100%';
 
-        const data = await response.json();
+        let data = {};
+        try {
+            data = await response.json();
+        } catch (_) {
+            data = {};
+        }
 
-        if (!response.ok) throw new Error(data.error || t("index.toast.serverError"));
+        if (!response.ok) {
+            throw new Error(data.error || (response.status === 404 ? 'API endpoint not found (404). Backend service is unreachable.' : t("index.toast.serverError")));
+        }
 
         let url;
         if (password) {
